@@ -1,0 +1,47 @@
+type Query {
+    phoneBooks(query: String): [PhoneBook!]!
+    phoneEntry(query: String): [PhoneBookEntry!]!
+}
+
+
+type Mutation {
+    createPhoneBook(data: CreatePhoneBookInput!): PhoneBook!
+    deletePhoneBook(id: ID!): PhoneBook!
+    updatePhoneBook(id: ID!, data: CreatePhoneBookInput!): PhoneBook!
+
+    createPhoneBookEntry(data: CreatePhoneBookEntryInput!): PhoneBookEntry!
+    deletePhoneBookEntry(id: ID!): PhoneBookEntry!
+    updatePhoneBookEntry(id: ID!, data: UpdatePhoneBookEntryInput!): PhoneBookEntry!
+}
+
+input CreatePhoneBookInput {
+    text: String!
+}
+
+input CreatePhoneBookEntryInput {
+    name: String!
+    cell: String!
+    img: String
+    phoneBookId: ID!
+}
+
+input UpdatePhoneBookEntryInput {
+    name: String!
+    cell: String!
+    img: String
+}
+
+type PhoneBook {
+    id: ID!
+    text: String!
+    phoneBookEntries: [PhoneBookEntry!]!
+}
+
+type PhoneBookEntry {
+    id: ID!
+    cell: String!
+    name: String!
+    img: String
+    phoneBook: PhoneBook!
+}
+
